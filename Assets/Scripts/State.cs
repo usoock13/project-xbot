@@ -2,28 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class State : MonoBehaviour
-{
-    public delegate void OnStay();
-    public delegate void OnInactive();
-    public delegate void OnActive();
+public class State {
+    string stateName;
 
-    OnStay stay;
-    OnInactive inActive;
-    OnActive onActive;
-
-    public void SetStay()
-    {
-
+    public State(string name) {
+        stateName = name;
     }
 
-    public void SetInActive()
-    {
+    public delegate void StayDelegate();
+    public delegate void ActiveDelegate();
+    public delegate void InactiveDelegate();
 
-    }
-
-    public void SetOnActive()
-    {
-
-    }
+    public StayDelegate OnStay;
+    public ActiveDelegate OnActive;
+    public InactiveDelegate OnInactive;
 }
