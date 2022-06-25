@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour {
     bool scriptActiving = false;
     ScriptUI currentScript;
 
-    bool uiActiving = false;
+    public bool uiActiving { get; private set; } = false;
     InteractionUI currentUI;
 
     void Awake() {
@@ -44,6 +44,7 @@ public class UIManager : MonoBehaviour {
         if(currentUI) currentUI.SetActiveCanvas(false);
         currentUI = ui;
         currentUI.SetActiveCanvas(true);
+        uiActiving = true;
     }
     #endregion
 }
