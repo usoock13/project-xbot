@@ -37,7 +37,7 @@ public class Player : LivingEntity {
             canMove = false;
             playerRigidbody.AddForce(playerAngle * moveSpeed ,ForceMode.Impulse);
         };
-        dodgeState.OnInactive += () =>{
+        dodgeState.OnInactive += () => {
             playerAnimator.SetBool("Dodge",false);
             canMove = true;
         };
@@ -61,7 +61,6 @@ public class Player : LivingEntity {
             this.currentSpeed = Vector3.zero;
             playerStateMachine.ChangeState(idleState);
         }
-        
     }
     // Player Move
     public void Move(Vector3 direction)  {
@@ -77,7 +76,7 @@ public class Player : LivingEntity {
     }
 
     IEnumerator DodgeCoroutine(){
-         yield return new WaitForSeconds(0.3f);
+         yield return new WaitForSeconds(3f);
         playerStateMachine.ChangeState(idleState);
     }
 }

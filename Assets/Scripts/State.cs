@@ -9,15 +9,15 @@ public class State {
         stateName = name;
     }
     public static bool operator == (State a, State b) {
-        return a.Equals(b);
+        return Object.Equals(a, b);
     }
     public static bool operator != (State a, State b) {
-        return !a.Equals(b);
+        return !Object.Equals(a, b);
     }
     public override bool Equals(object other){
-        if(other == null){
-            return false;    
-        }
+        if(other == null)
+            return false;
+
         if(GetType() == other.GetType()) {
             return Equals((State)other);
         }
@@ -25,6 +25,9 @@ public class State {
     }
     public bool Equals(State other){
         return stateName == other.stateName;
+    }
+    public override int GetHashCode() {
+        return int.Parse(stateName);
     }
     public delegate void StayDelegate();
     public delegate void ActiveDelegate();

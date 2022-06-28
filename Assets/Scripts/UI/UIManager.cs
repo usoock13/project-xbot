@@ -5,6 +5,8 @@ using UnityEngine;
 public class UIManager : MonoBehaviour {
     static public GameObject instance = null;
 
+    InputManager inputManager;
+
     bool scriptActiving = false;
     ScriptUI currentScript;
 
@@ -19,6 +21,11 @@ public class UIManager : MonoBehaviour {
             Destroy(this.gameObject);
         }
     }
+    void Start() {
+        inputManager = InputManager.instance.GetComponent<InputManager>();
+        DontDestroyOnLoad(this);
+    }
+
     #region Script UI Area
     public void SetActiveScript(bool active) {
         scriptActiving = active;
@@ -31,9 +38,15 @@ public class UIManager : MonoBehaviour {
     #endregion
 
     #region Interaction UI Area
+    /* base method >> */
     public void SetActiveUI(bool active) {
         uiActiving = active;
         currentUI.SetActiveCanvas(active);
+        if(active) {
+            inputManager.ChangeInputState(InputState.interaction);
+        } else {
+            inputManager.ChangeInputState(InputState.battle);
+        }
     }
     public void ChangeUI(InteractionUI ui) {
         currentUI.SetActiveCanvas(false);
@@ -45,6 +58,13 @@ public class UIManager : MonoBehaviour {
         currentUI = ui;
         currentUI.SetActiveCanvas(true);
         uiActiving = true;
+        inputManager.ChangeInputState(InputState.interaction);
+    }
+    /* << base method */
+    public void CloseUIByEscape() {
+        if(currentUI.closeByEscape) {
+            SetActiveUI(false);
+        }
     }
     #endregion
 }
