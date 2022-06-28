@@ -9,10 +9,10 @@ public class Player : LivingEntity {
     [SerializeField] Animator playerAnimator;
     [SerializeField] GameObject playerAvatar;
     Vector3 currentSpeed;
-    Vector3 currentPos;
 
     float moveSpeed = 5f;
     bool canMove = true;
+    bool isDodge = false;
 
     State idleState = new State("idle");
     State moveState = new State("move");
@@ -31,11 +31,11 @@ public class Player : LivingEntity {
             playerAnimator.SetBool("Run", false);
         };
         dodgeState.OnActive += () =>{
+            Vector3 playerAngle = playerAvatar.transform.forward;
             StartCoroutine(DodgeCoroutine());
-            currentPos = transform.position;
             playerAnimator.SetBool("Dodge",true);
             canMove = false;
-            // playerRigidbody.AddForce(new Vector3(),ForceMode.Impulse);
+            playerRigidbody.AddForce(playerAngle * moveSpeed ,ForceMode.Impulse);
         };
         dodgeState.OnInactive += () =>{
             playerAnimator.SetBool("Dodge",false);
@@ -57,8 +57,11 @@ public class Player : LivingEntity {
 
     }
     public void Idle() {
-        this.currentSpeed = Vector3.zero;
-        playerStateMachine.ChangeState(idleState);
+        if(playerStateMachine.currentState != dodgeState){
+            this.currentSpeed = Vector3.zero;
+            playerStateMachine.ChangeState(idleState);
+        }
+        
     }
     // Player Move
     public void Move(Vector3 direction)  {
