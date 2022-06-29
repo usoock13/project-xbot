@@ -69,7 +69,7 @@ public class Player : LivingEntity {
     // Player Move
     public void Move(Vector3 direction)  {
         if(!isDodge) {
-            this.currentSpeed = direction * moveSpeed;
+            this.currentSpeed = direction.normalized * moveSpeed;
             playerStateMachine.ChangeState(moveState);
         }
     }
