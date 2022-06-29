@@ -11,7 +11,7 @@ public class Player : LivingEntity {
     Vector3 currentSpeed;
 
     float moveSpeed = 5f;
-    bool canMove = true;
+    float dodgePower = 35f;
     bool isDodge = false;
 
     State idleState = new State("idle");
@@ -31,15 +31,16 @@ public class Player : LivingEntity {
             playerAnimator.SetBool("Run", false);
         };
         dodgeState.OnActive += () =>{
+            isDodge = true;
             Vector3 playerAngle = playerAvatar.transform.forward;
             StartCoroutine(DodgeCoroutine());
-            playerAnimator.SetBool("Dodge",true);
-            canMove = false;
-            playerRigidbody.AddForce(playerAngle * moveSpeed ,ForceMode.Impulse);
+            playerAnimator.SetBool("Dodge", true);
+            playerRigidbody.AddForce(playerAngle * dodgePower, ForceMode.Impulse);
         };
         dodgeState.OnInactive += () => {
-            playerAnimator.SetBool("Dodge",false);
-            canMove = true;
+            isDodge = false;
+            playerAnimator.SetBool("Dodge", false);
+            playerRigidbody.velocity = new Vector3(0, playerRigidbody.velocity.y, 0);
         };
     }
     // Weapon
@@ -57,15 +58,17 @@ public class Player : LivingEntity {
 
     }
     public void Idle() {
-        if(playerStateMachine.currentState != dodgeState){
+        if(!isDodge) {
             this.currentSpeed = Vector3.zero;
             playerStateMachine.ChangeState(idleState);
         }
     }
     // Player Move
     public void Move(Vector3 direction)  {
-        this.currentSpeed = direction * moveSpeed;
-        playerStateMachine.ChangeState(moveState);
+        if(!isDodge) {
+            this.currentSpeed = direction * moveSpeed;
+            playerStateMachine.ChangeState(moveState);
+        }
     }
     public void Dodge() {
         playerStateMachine.ChangeState(dodgeState);
@@ -76,7 +79,7 @@ public class Player : LivingEntity {
     }
 
     IEnumerator DodgeCoroutine(){
-         yield return new WaitForSeconds(3f);
+         yield return new WaitForSeconds(.3f);
         playerStateMachine.ChangeState(idleState);
     }
 }

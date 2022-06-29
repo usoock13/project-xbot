@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d396d2f6f532f704db4e05f7564dad83
+guid: f9bd6281321fde645836e4d9199bd6c4
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
-      74: -203655887218126122
+      74: -4791504522942941401
     second: Player Dodge
   externalObjects: {}
   materials:
@@ -37,10 +37,10 @@ ModelImporter:
     clipAnimations:
     - serializedVersion: 16
       name: Player Dodge
-      takeName: mixamo.com
+      takeName: Armature|Armature|mixamo.com|Layer0
       internalID: 0
       firstFrame: 0
-      lastFrame: 25
+      lastFrame: 28
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
