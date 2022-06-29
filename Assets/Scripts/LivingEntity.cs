@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LivingEntity : MonoBehaviour
-{
+public class LivingEntity : Entity {
     public bool isAlive;
     public float heathPoint;
 
-    public void OnDie()
-    {
+    public void OnDie() {
         isAlive = true;
     }
 }
