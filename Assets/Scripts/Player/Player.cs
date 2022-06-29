@@ -10,7 +10,7 @@ public class Player : LivingEntity {
     [SerializeField] GameObject playerAvatar;
     Vector3 currentSpeed;
 
-    float moveSpeed = 5f;
+    float moveSpeed = 8f;
     float dodgePower = 35f;
     bool isDodge = false;
 
@@ -24,11 +24,14 @@ public class Player : LivingEntity {
             playerAnimator.SetBool("Run", true);
         };
         moveState.OnStay += () => {
-            transform.Translate(currentSpeed * Time.deltaTime, Space.Self);
+            // transform.Translate(currentSpeed * Time.deltaTime, Space.Self);
+            // playerRigidbody.MovePosition(playerRigidbody.position + transform.TransformDirection(currentSpeed) * Time.deltaTime);
+            playerRigidbody.velocity = transform.TransformDirection(currentSpeed);
             playerAvatar.transform.LookAt(transform.position + (Quaternion.AngleAxis(45, Vector3.up) * currentSpeed).normalized);
         };
         moveState.OnInactive += () => {
             playerAnimator.SetBool("Run", false);
+            playerRigidbody.velocity = new Vector3(0, playerRigidbody.velocity.y, 0);
         };
         dodgeState.OnActive += () =>{
             isDodge = true;
