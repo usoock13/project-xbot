@@ -3,21 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+// melee, throwing, totem, huge, mage
 public abstract class Enemy : LivingEntity {
-    protected NavMeshAgent enemyNavAgent;
     protected GameObject playerObject;
+    protected StateMachine enemyStateMachine;
+    protected NavMeshAgent enemyNavAgent;
     protected GameObject currentTarget;
 
-    public void Start() {
+    protected float pathUpdateInterval = .05f;
+
+    [SerializeField] protected GameObject detectRange;
+    [SerializeField] protected GameObject attackRange;
+    [SerializeField] protected GameObject ownAvatar;
+
+    protected virtual void Start() {
         enemyNavAgent = GetComponent<NavMeshAgent>();
         enemyNavAgent.updateRotation = false;
+        
+        enemyStateMachine = GetComponent<StateMachine>();
+
+        if(ownAvatar == null)
+            try { ownAvatar = transform.Find("Avatar").gameObject; }
+            catch { Debug.LogError("Can not find Enemy own Avatar"); }
+
         playerObject = GameObject.FindGameObjectWithTag("Player");
-        ChaseTarget();
     }
     public void SetTarget(GameObject target) {
         currentTarget = target;
     }
-    public virtual void ChaseTarget() {
-        Invoke("ChaseTarget", .3f);
+    public void ClearTarget() {
+        currentTarget = null;
+    }
+    public void ClearTarget(GameObject target) {
+        if(currentTarget == target) {
+            currentTarget = null;
+        }
     }
 }
