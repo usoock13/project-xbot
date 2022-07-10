@@ -11,4 +11,7 @@ public class Damage : MonoBehaviour {
     void Start() {
         origin = GetComponent<Entity>();
     }
+    void Update() {
+        
+    }
 }

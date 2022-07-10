@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Player : LivingEntity {
     public Rigidbody playerRigidbody;
-
-    StateMachine playerStateMachine;
-    [SerializeField] Animator playerAnimator;
+    protected StateMachine playerStateMachine;
+    [SerializeField] protected Animator playerAnimator;
     [SerializeField] GameObject playerAvatar;
     Vector3 currentSpeed;
 
@@ -14,12 +13,15 @@ public class Player : LivingEntity {
     float dodgePower = 35f;
     bool isDodge = false;
 
-    State idleState = new State("idle");
-    State moveState = new State("move");
-    State dodgeState = new State("dodge");
+    protected State idleState = new State("idle");
+    protected State moveState = new State("move");
+    protected State dodgeState = new State("dodge");
 
-    void Start() {
+    protected void Start() {
         playerStateMachine = GetComponent<StateMachine>();
+        InitializeState();
+    }
+    void InitializeState() {
         moveState.OnActive += () => {
             playerAnimator.SetBool("Run", true);
         };
@@ -47,15 +49,9 @@ public class Player : LivingEntity {
         };
     }
     // Weapon
-    void BasicAttack() {
-
-    }
-    void SpecialAttack() {
-
-    }
-    void UtilityAbility() {
-
-    }
+    virtual public void BasicAttack() {}
+    virtual public void SpecialAttack() {}
+    virtual public void UtilityAbility() {}
     // (Q)skill
     void PlayerAbility() {
 
@@ -76,11 +72,6 @@ public class Player : LivingEntity {
     public void Dodge() {
         playerStateMachine.ChangeState(dodgeState);
     }
-
-    void GroundCheck(){
-
-    }
-
     IEnumerator DodgeCoroutine(){
          yield return new WaitForSeconds(.3f);
         playerStateMachine.ChangeState(idleState);

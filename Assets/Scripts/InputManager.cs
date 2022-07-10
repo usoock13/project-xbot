@@ -54,11 +54,12 @@ public class InputManager : MonoBehaviour {
         } else {
             player.Idle();
         }
-        
         if(Input.GetButtonDown("Dodge")) {
             player.Dodge();
         }
-
+        if(Input.GetMouseButtonDown(0)) {
+            player.BasicAttack();
+        }
         if(Input.GetKeyDown(KeyCode.Escape)) {
             InteractionUI target = inGameMenu.GetComponent<InteractionUI>();
             if(target) {
