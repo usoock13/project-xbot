@@ -36,4 +36,7 @@ public class State {
     public StayDelegate OnStay;
     public ActiveDelegate OnActive;
     public InactiveDelegate OnInactive;
+    public override string ToString() {
+        return stateName;
+    }
 }

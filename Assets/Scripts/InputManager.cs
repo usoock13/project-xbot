@@ -23,6 +23,9 @@ public class InputManager : MonoBehaviour {
         } else {
             Destroy(this.gameObject);
         }
+        if(player == null) {
+            player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        }
     }
 
     void Start() {

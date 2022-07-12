@@ -4,36 +4,45 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class MoveableEnemy : Enemy {
-    State idleState = new State("Idle");
-    State chaseState = new State("Chase");
-    State hitState = new State("Hit");
-
-    Animator enemyAnimator;
+    protected State idleState = new State("Idle");
+    protected State chaseState = new State("Chase");
+    protected State hitState = new State("Hit");
 
     Coroutine chaseCoroutine;
 
+    public float moveSpeed { get; private set; } = 5f;
+    public float SetMoveSpeed {
+        set{
+            moveSpeed = value;
+            enemyNavAgent.speed = moveSpeed;
+        }
+    }
+
     protected override void Start() {
         base.Start();
+        enemyNavAgent.speed = moveSpeed;
         if(enemyAnimator == null) enemyAnimator = ownAvatar.GetComponent<Animator>();
+        if(enemyRigidbody == null) enemyRigidbody = GetComponent<Rigidbody>();
 
-        var detectEventCaster = detectRange.GetComponent<PhysicsEventBroadcaster>();
+        var detectEventCaster = detectRange.GetComponent<PhysicsEventBroadcaster>(); // Initialize object that check target in range of detect
         if(detectEventCaster) {
             detectEventCaster.triggerStayEvent += OnDetectTarget;
-            detectEventCaster.triggerExitEvent += OnExitTarget;
         }
-        var attackEventCaster = attackRange.GetComponent<PhysicsEventBroadcaster>();
+        var attackEventCaster = attackRange.GetComponent<PhysicsEventBroadcaster>(); // Initialize object that check target in range of attack
         if(attackEventCaster) {
             attackEventCaster.triggerEnterEvent += OnReachTarget;
+            attackEventCaster.triggerStayEvent += OnStayTargetInReach;
         }
     }
     protected virtual void InitializeState() {
         chaseState.OnActive += () => {
             enemyAnimator.SetBool("Chase", true);
+            enemyNavAgent.isStopped = false;
             chaseCoroutine = StartCoroutine(ChaseTarget());
         };
         chaseState.OnInactive += () => {
             enemyAnimator.SetBool("Chase", false);
-            ClearTarget();
+            enemyNavAgent.isStopped = true;
             StopCoroutine(chaseCoroutine);
         };
     }
@@ -53,12 +62,6 @@ public class MoveableEnemy : Enemy {
             enemyStateMachine.ChangeState(chaseState);
         }
     }
-    public virtual void OnExitTarget(Collider other) {
-        if(currentTarget == other.gameObject) {
-            enemyStateMachine.ChangeState(idleState);
-        }
-    }
-    public virtual void OnReachTarget(Collider other) {
-        print("I wanna hit you.");
-    }
+    public virtual void OnReachTarget(Collider other) {}
+    public virtual void OnStayTargetInReach(Collider other) {}
 }

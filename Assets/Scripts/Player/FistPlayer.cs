@@ -10,7 +10,7 @@ public class FistPlayer : Player {
     }
     void InitializeState() {
         fistAttackState.OnActive += () => {
-            Debug.Log("주먹쫌날려봐 이새끼야");
+            Debug.Log("연속 주먹 공격!");
             playerAnimator.SetBool("Fist Attack",true);
         };
         fistAttackState.OnInactive += () => {

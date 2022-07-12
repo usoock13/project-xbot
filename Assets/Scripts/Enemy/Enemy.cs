@@ -6,9 +6,14 @@ using UnityEngine.AI;
 // melee, throwing, totem, huge, mage
 public abstract class Enemy : LivingEntity {
     protected GameObject playerObject;
+
     protected StateMachine enemyStateMachine;
+
     protected NavMeshAgent enemyNavAgent;
     protected GameObject currentTarget;
+
+    protected Animator enemyAnimator;
+    protected Rigidbody enemyRigidbody;
 
     protected float pathUpdateInterval = .05f;
 

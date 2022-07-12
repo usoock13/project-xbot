@@ -271,7 +271,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -4791504522942941401, guid: f9bd6281321fde645836e4d9199bd6c4,
+  m_Motion: {fileID: -4791504522942941401, guid: 68b6340989a978447ac6432b6ac4f3f2,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -301,7 +301,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -7013104944599354882, guid: 8a419ee656f232441a88feec584d08e8,
+  m_Motion: {fileID: -4791504522942941401, guid: 5eedece449e900d42b291818f71e7b54,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -440,25 +440,25 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Dodge
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Fist Attack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Combo Count
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 2
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -617,7 +617,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 2913b985df63b86479e3699e23a3f367,
+  m_Motion: {fileID: -1553999959077263903, guid: fb847698be28aed409aae1b31b6bdbe6,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
