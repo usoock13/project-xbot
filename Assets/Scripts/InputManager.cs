@@ -63,6 +63,9 @@ public class InputManager : MonoBehaviour {
         if(Input.GetMouseButtonDown(0)) {
             player.BasicAttack();
         }
+        if(Input.GetKeyDown(KeyCode.Q)) {
+            player.PlayerAbility();
+        }
         if(Input.GetKeyDown(KeyCode.Escape)) {
             InteractionUI target = inGameMenu.GetComponent<InteractionUI>();
             if(target) {

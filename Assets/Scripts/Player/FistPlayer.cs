@@ -10,10 +10,12 @@ public class FistPlayer : Player {
     }
     void InitializeState() {
         fistAttackState.OnActive += () => {
-            Debug.Log("연속 주먹 공격!");
+            canMove = false;
             playerAnimator.SetBool("Fist Attack",true);
+            StartCoroutine(AttackCoroutine());
         };
         fistAttackState.OnInactive += () => {
+            canMove = true;
             playerAnimator.SetBool("Fist Attack",false);
         };
     }
@@ -25,5 +27,9 @@ public class FistPlayer : Player {
     }
     public override void UtilityAbility() {
 
+    }
+    IEnumerator AttackCoroutine() {
+        yield return new WaitForSeconds(0.8f);
+        playerStateMachine.ChangeState(idleState);
     }
 }
