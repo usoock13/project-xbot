@@ -42,9 +42,6 @@ public class MeleeBasicEnemy : MoveableEnemy {
             enemyAnimator.SetBool("Hit", false);
         };
     }
-    public void Update() {
-        print(enemyStateMachine.currentState);
-    }
     public override void OnDetectTarget(Collider other) {
         if(enemyStateMachine.currentState == attackingState
         || enemyStateMachine.currentState == beforeAttackState

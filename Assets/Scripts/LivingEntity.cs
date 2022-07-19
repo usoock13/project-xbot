@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LivingEntity : Entity {
-    public bool isAlive;
-    public float heathPoint;
+    [SerializeField] protected bool isAlive;
+    [SerializeField] protected float healthPoint;
 
     public void OnDie() {
         isAlive = true;

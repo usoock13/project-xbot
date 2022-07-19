@@ -35,6 +35,10 @@ public class MoveableEnemy : Enemy {
         }
     }
     protected virtual void InitializeState() {
+        idleState.OnStay += () => {
+            if(currentTarget != null)
+                enemyStateMachine.ChangeState(chaseState);
+        };
         chaseState.OnActive += () => {
             enemyAnimator.SetBool("Chase", true);
             enemyNavAgent.isStopped = false;
