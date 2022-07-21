@@ -813,6 +813,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4610899834248986467, guid: b9862d49e1c06e14ab5f7c9c05dfa53a,
         type: 3}
+      propertyPath: coolTime
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4610899834248986467, guid: b9862d49e1c06e14ab5f7c9c05dfa53a,
+        type: 3}
       propertyPath: layer.m_Bits
       value: 256
       objectReference: {fileID: 0}
@@ -879,7 +884,7 @@ PrefabInstance:
     - target: {fileID: 6166167330980376151, guid: b9862d49e1c06e14ab5f7c9c05dfa53a,
         type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.8512586
+      value: 1.1049724
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9862d49e1c06e14ab5f7c9c05dfa53a, type: 3}

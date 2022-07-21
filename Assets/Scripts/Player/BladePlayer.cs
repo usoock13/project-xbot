@@ -8,4 +8,8 @@ public class BladePlayer : Player
     {
         base.Start();
     }
+    void InitializeState() {
+        
+    }
+
 }
